@@ -1,0 +1,1530 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Momentous Fund — AT4D</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,700&family=Source+Sans+3:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --blue:        #1b4fa0;
+      --blue-dark:   #0f3070;
+      --blue-mid:    #2861b8;
+      --blue-light:  #dce8f7;
+      --orange:      #f26522;
+      --orange-dark: #d4501a;
+      --orange-light:#fde8d8;
+      --white:       #ffffff;
+      --off-white:   #f8f5f0;
+      --beige:       #f0ebe2;
+      --charcoal:    #1a1a2e;
+      --body-text:   #3a3f5c;
+      --muted:       #7a84a8;
+      --border:      #dde4ef;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Source Sans 3', sans-serif;
+      background: var(--white);
+      color: var(--charcoal);
+      overflow-x: hidden;
+    }
+
+    h1, h2, h3, h4 { font-family: 'Raleway', sans-serif; }
+
+    /* ===== NAV ===== */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      padding: 1rem 2.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: rgba(15, 48, 112, 0.96);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(242, 101, 34, 0.2);
+    }
+
+    .nav-logo {
+      font-family: 'Raleway', sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: #fff;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .nav-logo-triangle {
+      width: 20px; height: 20px;
+      border-left: 10px solid transparent;
+      border-right: 10px solid transparent;
+      border-bottom: 18px solid var(--orange);
+    }
+
+    .nav-logo span { color: var(--orange); }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+      margin: 0; padding: 0;
+      align-items: center;
+    }
+
+    .nav-links a {
+      color: rgba(255,255,255,0.6);
+      text-decoration: none;
+      font-size: 0.78rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      font-weight: 600;
+      transition: color 0.22s ease;
+    }
+
+    .nav-links a:hover { color: #fff; }
+
+    .nav-cta {
+      background: var(--orange) !important;
+      color: #fff !important;
+      padding: 0.5rem 1.25rem;
+      border-radius: 3px;
+      font-weight: 700 !important;
+      transition: background 0.22s ease, transform 0.18s ease !important;
+    }
+
+    .nav-cta:hover {
+      background: var(--orange-dark) !important;
+      color: #fff !important;
+      transform: translateY(-1px);
+    }
+
+    .nav-cta:active { transform: translateY(0); }
+
+    /* ===== HERO ===== */
+    #hero {
+      min-height: 100vh;
+      background: var(--blue);
+      position: relative;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+    }
+
+    .hero-bg-gradient {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 70% 60% at 75% 40%, rgba(40, 97, 184, 0.5) 0%, transparent 65%),
+        radial-gradient(ellipse 50% 50% at 10% 80%, rgba(15, 48, 112, 0.6) 0%, transparent 65%),
+        radial-gradient(ellipse 40% 40% at 90% 10%, rgba(242, 101, 34, 0.08) 0%, transparent 60%);
+    }
+
+    /* Subtle diagonal stripe pattern */
+    .hero-pattern {
+      position: absolute;
+      inset: 0;
+      opacity: 0.04;
+      background-image: repeating-linear-gradient(
+        -45deg,
+        #fff 0, #fff 1px,
+        transparent 0, transparent 50%
+      );
+      background-size: 24px 24px;
+    }
+
+    /* Orange accent bar left edge */
+    #hero::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 5px;
+      background: var(--orange);
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 1200px;
+      margin: 0 auto;
+      width: 100%;
+      padding: 9rem 2.5rem 6rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+
+    .hero-left {}
+
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-size: 0.72rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--orange);
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+      opacity: 0;
+      transform: translateY(14px);
+      animation: fadeUp 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.15s forwards;
+    }
+
+    .hero-tag {
+      display: inline-block;
+      background: rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.25);
+      color: #fff;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 0.3rem 0.85rem;
+      border-radius: 2px;
+      margin-bottom: 1.5rem;
+      opacity: 0;
+      transform: translateY(14px);
+      animation: fadeUp 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.1s forwards;
+      display: inline-block;
+    }
+
+    .hero-title {
+      font-family: 'Raleway', sans-serif;
+      font-size: clamp(2.8rem, 6vw, 5rem);
+      font-weight: 800;
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+      color: #fff;
+      margin-bottom: 0.25rem;
+      opacity: 0;
+      transform: translateY(18px);
+      animation: fadeUp 0.9s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.3s forwards;
+    }
+
+    .hero-title-orange {
+      font-family: 'Raleway', sans-serif;
+      font-size: clamp(2.8rem, 6vw, 5rem);
+      font-weight: 800;
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+      color: var(--orange);
+      opacity: 0;
+      transform: translateY(18px);
+      animation: fadeUp 0.9s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.4s forwards;
+    }
+
+    .hero-subtitle {
+      font-size: 1rem;
+      font-weight: 400;
+      line-height: 1.7;
+      color: rgba(255,255,255,0.7);
+      max-width: 480px;
+      margin-top: 1.5rem;
+      opacity: 0;
+      transform: translateY(14px);
+      animation: fadeUp 0.9s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.55s forwards;
+    }
+
+    .hero-actions {
+      display: flex;
+      align-items: center;
+      gap: 1.25rem;
+      margin-top: 2.5rem;
+      opacity: 0;
+      transform: translateY(14px);
+      animation: fadeUp 0.9s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.7s forwards;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--orange);
+      color: #fff;
+      padding: 0.85rem 2rem;
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border-radius: 3px;
+      transition: background 0.22s ease, transform 0.18s ease, box-shadow 0.22s ease;
+      box-shadow: 0 4px 20px rgba(242, 101, 34, 0.35), 0 1px 4px rgba(0,0,0,0.15);
+    }
+
+    .btn-primary:hover {
+      background: var(--orange-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 28px rgba(242, 101, 34, 0.45), 0 2px 8px rgba(0,0,0,0.15);
+    }
+
+    .btn-primary:active { transform: translateY(0); }
+
+    .btn-ghost {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      color: rgba(255,255,255,0.65);
+      font-size: 0.82rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      text-decoration: none;
+      border-bottom: 1px solid rgba(255,255,255,0.3);
+      padding-bottom: 2px;
+      transition: color 0.22s ease, border-color 0.22s ease;
+    }
+
+    .btn-ghost:hover {
+      color: #fff;
+      border-color: #fff;
+    }
+
+    /* Hero right: stat block */
+    .hero-right {
+      opacity: 0;
+      transform: translateY(18px);
+      animation: fadeUp 0.9s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.6s forwards;
+    }
+
+    .hero-stats-card {
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 6px;
+      padding: 2.5rem;
+      backdrop-filter: blur(8px);
+    }
+
+    .hero-stats-title {
+      font-size: 0.68rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.45);
+      margin-bottom: 2rem;
+    }
+
+    .hero-stat-row {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .hero-stat-item {
+      display: flex;
+      align-items: center;
+      gap: 1.25rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .hero-stat-item:last-child { border-bottom: none; padding-bottom: 0; }
+
+    .hero-stat-num {
+      font-family: 'Raleway', sans-serif;
+      font-size: 2.6rem;
+      font-weight: 800;
+      color: var(--orange);
+      line-height: 1;
+      letter-spacing: -0.02em;
+      min-width: 5rem;
+    }
+
+    .hero-stat-label {
+      font-size: 0.88rem;
+      color: rgba(255,255,255,0.6);
+      line-height: 1.45;
+    }
+
+    /* ===== SECTION SHARED ===== */
+    .section-label {
+      font-size: 0.68rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      font-weight: 700;
+      color: var(--orange);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .section-label::before {
+      content: '';
+      width: 20px;
+      height: 2px;
+      background: var(--orange);
+    }
+
+    /* ===== OPPORTUNITY ===== */
+    #opportunity {
+      background: var(--white);
+      padding: 7rem 2.5rem;
+    }
+
+    .opportunity-inner { max-width: 1200px; margin: 0 auto; }
+
+    .opportunity-header {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: start;
+      margin-bottom: 5rem;
+    }
+
+    .opportunity-title {
+      font-family: 'Raleway', sans-serif;
+      font-size: clamp(2.2rem, 4.5vw, 3.8rem);
+      font-weight: 800;
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+      color: var(--charcoal);
+    }
+
+    .opportunity-title span { color: var(--blue); }
+
+    .opportunity-body {
+      font-size: 1rem;
+      line-height: 1.75;
+      color: var(--body-text);
+      margin-bottom: 1rem;
+    }
+
+    .big-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      margin-bottom: 4rem;
+    }
+
+    .big-stat-card {
+      background: var(--off-white);
+      border-radius: 4px;
+      padding: 2.5rem 2rem;
+      position: relative;
+      border-top: 3px solid var(--blue);
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .big-stat-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 36px rgba(27, 79, 160, 0.12), 0 2px 8px rgba(0,0,0,0.04);
+    }
+
+    .big-stat-num {
+      font-family: 'Raleway', sans-serif;
+      font-size: clamp(2.8rem, 4.5vw, 4rem);
+      font-weight: 800;
+      color: var(--blue);
+      line-height: 1;
+      letter-spacing: -0.02em;
+    }
+
+    .big-stat-label {
+      font-size: 0.88rem;
+      color: var(--muted);
+      margin-top: 0.6rem;
+      line-height: 1.5;
+    }
+
+    .missing-middle {
+      background: var(--blue);
+      border-radius: 6px;
+      padding: 3.5rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .missing-middle::after {
+      content: '';
+      position: absolute;
+      right: -60px; bottom: -60px;
+      width: 260px; height: 260px;
+      border-radius: 50%;
+      border: 2px solid rgba(255,255,255,0.06);
+    }
+
+    .missing-middle::before {
+      content: '';
+      position: absolute;
+      right: -20px; bottom: -20px;
+      width: 160px; height: 160px;
+      border-radius: 50%;
+      border: 2px solid rgba(255,255,255,0.04);
+    }
+
+    .missing-middle-title {
+      font-family: 'Raleway', sans-serif;
+      font-size: clamp(1.8rem, 3vw, 2.4rem);
+      font-weight: 800;
+      color: #fff;
+      line-height: 1.15;
+      letter-spacing: -0.01em;
+    }
+
+    .missing-middle-title em {
+      font-style: italic;
+      color: var(--orange);
+    }
+
+    .missing-middle-body {
+      font-size: 0.95rem;
+      line-height: 1.75;
+      color: rgba(255,255,255,0.7);
+    }
+
+    .roi-badges {
+      display: flex;
+      gap: 1rem;
+      margin-top: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .roi-badge {
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 4px;
+      padding: 0.85rem 1.25rem;
+      text-align: center;
+    }
+
+    .roi-badge-num {
+      font-family: 'Raleway', sans-serif;
+      font-size: 1.9rem;
+      font-weight: 800;
+      color: var(--orange);
+      line-height: 1;
+    }
+
+    .roi-badge-label {
+      font-size: 0.7rem;
+      color: rgba(255,255,255,0.5);
+      margin-top: 0.35rem;
+      line-height: 1.4;
+      letter-spacing: 0.03em;
+    }
+
+    /* ===== WHO WE ARE ===== */
+    #who {
+      background: var(--off-white);
+      padding: 7rem 2.5rem;
+    }
+
+    .who-inner { max-width: 1200px; margin: 0 auto; }
+
+    .who-grid {
+      display: grid;
+      grid-template-columns: 5fr 7fr;
+      gap: 5rem;
+      align-items: start;
+      margin-top: 3.5rem;
+    }
+
+    .who-title {
+      font-family: 'Raleway', sans-serif;
+      font-size: clamp(2rem, 3.5vw, 3rem);
+      font-weight: 800;
+      color: var(--charcoal);
+      line-height: 1.1;
+      letter-spacing: -0.015em;
+      position: sticky;
+      top: 7rem;
+    }
+
+    .who-title span { color: var(--blue); }
+
+    .who-body p {
+      font-size: 1rem;
+      line-height: 1.75;
+      color: var(--body-text);
+      margin-bottom: 1.25rem;
+    }
+
+    .who-metrics {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.25rem;
+      margin-top: 2.5rem;
+    }
+
+    .who-metric {
+      background: var(--white);
+      border-radius: 4px;
+      padding: 1.5rem;
+      border-left: 3px solid var(--orange);
+      box-shadow: 0 1px 4px rgba(27, 79, 160, 0.06), 0 4px 16px rgba(27, 79, 160, 0.06);
+    }
+
+    .who-metric-num {
+      font-family: 'Raleway', sans-serif;
+      font-size: 1.9rem;
+      font-weight: 800;
+      color: var(--blue);
+      line-height: 1;
+    }
+
+    .who-metric-label {
+      font-size: 0.78rem;
+      color: var(--muted);
+      margin-top: 0.35rem;
+      line-height: 1.4;
+    }
+
+    .quote-block {
+      margin-top: 2.5rem;
+      border-left: 4px solid var(--orange);
+      padding: 1.25rem 1.75rem;
+      background: var(--orange-light);
+      border-radius: 0 4px 4px 0;
+    }
+
+    .quote-text {
+      font-family: 'Raleway', sans-serif;
+      font-size: 1.15rem;
+      font-style: italic;
+      font-weight: 600;
+      color: var(--blue-dark);
+      line-height: 1.6;
+    }
+
+    .quote-author {
+      font-size: 0.8rem;
+      color: var(--muted);
+      margin-top: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+    }
+
+    /* ===== FUND ===== */
+    #fund {
+      background: var(--blue-dark);
+      padding: 7rem 2.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .fund-bg {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 60% 60% at 15% 50%, rgba(27, 79, 160, 0.5) 0%, transparent 65%),
+        radial-gradient(ellipse 40% 40% at 85% 20%, rgba(242, 101, 34, 0.06) 0%, transparent 60%);
+    }
+
+    .fund-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 2;
+    }
+
+    .fund-header {
+      text-align: center;
+      margin-bottom: 4.5rem;
+    }
+
+    .fund-title {
+      font-family: 'Raleway', sans-serif;
+      font-size: clamp(2.2rem, 4.5vw, 3.6rem);
+      font-weight: 800;
+      color: #fff;
+      line-height: 1.08;
+      letter-spacing: -0.02em;
+      margin-top: 1rem;
+    }
+
+    .fund-title em {
+      font-style: italic;
+      color: var(--orange);
+    }
+
+    .fund-subtitle {
+      font-size: 1rem;
+      color: rgba(255,255,255,0.55);
+      margin-top: 0.75rem;
+      line-height: 1.7;
+    }
+
+    .fund-stages {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      margin-bottom: 5rem;
+    }
+
+    .fund-stage {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 5px;
+      padding: 2.5rem 2rem;
+      transition: background 0.25s ease, border-color 0.25s ease, transform 0.25s ease;
+    }
+
+    .fund-stage:hover {
+      background: rgba(255,255,255,0.1);
+      border-color: rgba(242, 101, 34, 0.5);
+      transform: translateY(-4px);
+    }
+
+    .fund-stage-tag {
+      font-size: 0.68rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--orange);
+      font-weight: 700;
+      margin-bottom: 1.25rem;
+    }
+
+    .fund-stage-amount {
+      font-family: 'Raleway', sans-serif;
+      font-size: 3rem;
+      font-weight: 800;
+      color: #fff;
+      line-height: 1;
+      letter-spacing: -0.02em;
+    }
+
+    .fund-stage-details {
+      margin-top: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .fund-detail {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-size: 0.85rem;
+      color: rgba(255,255,255,0.55);
+    }
+
+    .fund-detail::before {
+      content: '';
+      width: 5px; height: 5px;
+      border-radius: 50%;
+      background: var(--orange);
+      flex-shrink: 0;
+    }
+
+    /* Focus Areas */
+    .focus-header {
+      font-family: 'Raleway', sans-serif;
+      font-size: clamp(1.6rem, 3vw, 2.2rem);
+      font-weight: 800;
+      color: #fff;
+      letter-spacing: -0.01em;
+      margin-bottom: 2rem;
+    }
+
+    .focus-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.5rem;
+    }
+
+    .focus-card {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 5px;
+      padding: 2rem;
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 1.25rem;
+      align-items: start;
+      transition: background 0.25s ease, border-color 0.25s ease;
+    }
+
+    .focus-card:hover {
+      background: rgba(255,255,255,0.09);
+      border-color: rgba(242, 101, 34, 0.35);
+    }
+
+    .focus-icon {
+      width: 42px; height: 42px;
+      border-radius: 8px;
+      background: rgba(242, 101, 34, 0.15);
+      border: 1px solid rgba(242, 101, 34, 0.25);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      flex-shrink: 0;
+    }
+
+    .focus-card-title {
+      font-family: 'Raleway', sans-serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 0.35rem;
+    }
+
+    .focus-card-body {
+      font-size: 0.85rem;
+      color: rgba(255,255,255,0.5);
+      line-height: 1.6;
+    }
+
+    /* ===== APPROACH ===== */
+    #approach {
+      background: var(--white);
+      padding: 7rem 2.5rem;
+    }
+
+    .approach-inner { max-width: 1200px; margin: 0 auto; }
+
+    .approach-header {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: end;
+      margin-bottom: 4rem;
+    }
+
+    .approach-title {
+      font-family: 'Raleway', sans-serif;
+      font-size: clamp(2.2rem, 4.5vw, 3.8rem);
+      font-weight: 800;
+      color: var(--charcoal);
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+    }
+
+    .approach-title span { color: var(--blue); }
+
+    .approach-desc {
+      font-size: 1rem;
+      line-height: 1.75;
+      color: var(--body-text);
+    }
+
+    .pillars {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      margin-bottom: 4rem;
+    }
+
+    .pillar {
+      background: var(--off-white);
+      border-radius: 4px;
+      padding: 2rem;
+      position: relative;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .pillar:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 28px rgba(27, 79, 160, 0.1), 0 2px 8px rgba(0,0,0,0.04);
+    }
+
+    .pillar-num {
+      font-family: 'Raleway', sans-serif;
+      font-size: 3.5rem;
+      font-weight: 800;
+      color: rgba(27, 79, 160, 0.08);
+      line-height: 1;
+      position: absolute;
+      top: 0.75rem;
+      right: 1rem;
+    }
+
+    .pillar-title {
+      font-family: 'Raleway', sans-serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--blue);
+      margin-bottom: 0.65rem;
+    }
+
+    .pillar-body {
+      font-size: 0.88rem;
+      line-height: 1.65;
+      color: var(--body-text);
+    }
+
+    /* Thesis */
+    .thesis {
+      background: var(--blue);
+      border-radius: 6px;
+      padding: 0;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      overflow: hidden;
+    }
+
+    .thesis-pillar {
+      padding: 2.5rem 2rem;
+      border-right: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .thesis-pillar:last-child { border-right: none; }
+
+    .thesis-pillar-title {
+      font-family: 'Raleway', sans-serif;
+      font-size: 1.3rem;
+      font-weight: 800;
+      color: var(--orange);
+      margin-bottom: 0.85rem;
+    }
+
+    .thesis-pillar-body {
+      font-size: 0.88rem;
+      line-height: 1.7;
+      color: rgba(255,255,255,0.65);
+    }
+
+    /* ===== EVIDENCE ===== */
+    #evidence {
+      background: var(--beige);
+      padding: 7rem 2.5rem;
+    }
+
+    .evidence-inner { max-width: 1200px; margin: 0 auto; }
+
+    .evidence-title {
+      font-family: 'Raleway', sans-serif;
+      font-size: clamp(2.2rem, 4vw, 3.4rem);
+      font-weight: 800;
+      color: var(--charcoal);
+      line-height: 1.08;
+      letter-spacing: -0.02em;
+      margin: 1rem 0 3rem;
+    }
+
+    .evidence-title span { color: var(--blue); }
+
+    .evidence-cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      margin-bottom: 4rem;
+    }
+
+    .evidence-card {
+      background: var(--white);
+      border-radius: 4px;
+      padding: 2rem;
+      border-top: 3px solid var(--orange);
+      box-shadow: 0 1px 4px rgba(0,0,0,0.04), 0 6px 20px rgba(27, 79, 160, 0.06);
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .evidence-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.06), 0 12px 32px rgba(27, 79, 160, 0.1);
+    }
+
+    .evidence-card-title {
+      font-family: 'Raleway', sans-serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--charcoal);
+      margin-bottom: 0.65rem;
+    }
+
+    .evidence-card-body {
+      font-size: 0.88rem;
+      line-height: 1.7;
+      color: var(--body-text);
+    }
+
+    .partners-label {
+      font-size: 0.68rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--muted);
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+    }
+
+    .partner-cards {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.5rem;
+    }
+
+    .partner-card {
+      background: var(--white);
+      border-radius: 4px;
+      padding: 2rem;
+      border-left: 4px solid var(--blue);
+      box-shadow: 0 1px 4px rgba(0,0,0,0.04), 0 4px 16px rgba(27, 79, 160, 0.06);
+    }
+
+    .partner-name {
+      font-family: 'Raleway', sans-serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--blue);
+      margin-bottom: 0.6rem;
+    }
+
+    .partner-body {
+      font-size: 0.88rem;
+      line-height: 1.7;
+      color: var(--body-text);
+    }
+
+    /* ===== CTA ===== */
+    #cta {
+      background: var(--blue);
+      padding: 8rem 2.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta-bg {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 70% 80% at 50% 50%, rgba(40, 97, 184, 0.5) 0%, transparent 65%),
+        radial-gradient(ellipse 40% 40% at 85% 15%, rgba(242, 101, 34, 0.1) 0%, transparent 60%);
+    }
+
+    /* Orange diagonal stripe accent */
+    #cta::before {
+      content: '';
+      position: absolute;
+      right: 0; top: 0; bottom: 0;
+      width: 5px;
+      background: var(--orange);
+    }
+
+    .cta-inner {
+      max-width: 760px;
+      margin: 0 auto;
+      text-align: center;
+      position: relative;
+      z-index: 2;
+    }
+
+    .cta-title {
+      font-family: 'Raleway', sans-serif;
+      font-size: clamp(2.8rem, 6vw, 4.8rem);
+      font-weight: 800;
+      color: #fff;
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+      margin: 1rem 0 1.5rem;
+    }
+
+    .cta-title em {
+      font-style: italic;
+      color: var(--orange);
+    }
+
+    .cta-body {
+      font-size: 1.05rem;
+      line-height: 1.75;
+      color: rgba(255,255,255,0.65);
+      max-width: 500px;
+      margin: 0 auto 2.5rem;
+    }
+
+    .cta-actions {
+      display: flex;
+      justify-content: center;
+      gap: 1.25rem;
+      flex-wrap: wrap;
+    }
+
+    .contact-row {
+      display: flex;
+      justify-content: center;
+      gap: 3rem;
+      margin-top: 4rem;
+      flex-wrap: wrap;
+    }
+
+    .contact-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.3rem;
+    }
+
+    .contact-label {
+      font-size: 0.63rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.35);
+      font-weight: 700;
+    }
+
+    .contact-value {
+      font-size: 0.9rem;
+      color: rgba(255,255,255,0.75);
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.22s ease;
+    }
+
+    .contact-value:hover { color: var(--orange); }
+
+    /* ===== FOOTER ===== */
+    footer {
+      background: var(--blue-dark);
+      padding: 1.75rem 2.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-top: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .footer-logo {
+      font-family: 'Raleway', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: rgba(255,255,255,0.4);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .footer-logo span { color: var(--orange); }
+
+    .footer-copy {
+      font-size: 0.75rem;
+      color: rgba(255,255,255,0.25);
+    }
+
+    /* ===== ANIMATIONS ===== */
+    @keyframes fadeUp {
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(22px);
+      transition: opacity 0.65s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 0.65s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 768px) {
+      nav { padding: 0.9rem 1.25rem; }
+      .nav-links { display: none; }
+      .hero-content { grid-template-columns: 1fr; gap: 2.5rem; padding: 7rem 1.25rem 4rem; }
+      #opportunity, #who, #fund, #approach, #evidence, #cta { padding: 4rem 1.25rem; }
+      .opportunity-header, .who-grid, .approach-header { grid-template-columns: 1fr; gap: 2rem; }
+      .big-stats, .fund-stages, .pillars, .evidence-cards, .focus-grid { grid-template-columns: 1fr; }
+      .missing-middle, .thesis { grid-template-columns: 1fr; }
+      .thesis { padding: 0; }
+      .thesis-pillar { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.1); }
+      .thesis-pillar:last-child { border-bottom: none; }
+      .partner-cards { grid-template-columns: 1fr; }
+      .who-metrics { grid-template-columns: repeat(2, 1fr); }
+      footer { flex-direction: column; gap: 0.75rem; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="#" class="nav-logo">
+      <div class="nav-logo-triangle"></div>
+      AT4D <span>Momentous</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#opportunity">Opportunity</a></li>
+      <li><a href="#who">About</a></li>
+      <li><a href="#fund">The Fund</a></li>
+      <li><a href="#approach">Approach</a></li>
+      <li><a href="#cta" class="nav-cta">Partner With Us</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section id="hero">
+    <div class="hero-bg-gradient"></div>
+    <div class="hero-pattern"></div>
+    <div class="hero-content">
+      <div class="hero-left">
+        <div class="hero-tag">Information Pack 2026</div>
+        <h1 class="hero-title">Building Africa's</h1>
+        <div class="hero-title-orange">AT Investment Ecosystem</div>
+        <p class="hero-subtitle">Africa's first early-stage investment vehicle for assistive technology ventures, offering catalytic alternative financing designed by people who understand disability tech markets.</p>
+        <div class="hero-actions">
+          <a href="#cta" class="btn-primary">
+            Partner With Us
+            <svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M2 6.5h9M7.5 2.5l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+          <a href="#opportunity" class="btn-ghost">Learn More</a>
+        </div>
+      </div>
+      <div class="hero-right">
+        <div class="hero-stats-card">
+          <div class="hero-stats-title">The Scale of the Opportunity</div>
+          <div class="hero-stat-row">
+            <div class="hero-stat-item">
+              <div class="hero-stat-num">200M</div>
+              <div class="hero-stat-label">Africans need at least one assistive product</div>
+            </div>
+            <div class="hero-stat-item">
+              <div class="hero-stat-num">90%</div>
+              <div class="hero-stat-label">Lack access due to availability &amp; price</div>
+            </div>
+            <div class="hero-stat-item">
+              <div class="hero-stat-num">9:1</div>
+              <div class="hero-stat-label">Return on assistive technology investment</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- OPPORTUNITY -->
+  <section id="opportunity">
+    <div class="opportunity-inner">
+      <div class="opportunity-header reveal">
+        <div>
+          <div class="section-label">The Opportunity</div>
+          <h2 class="opportunity-title" style="margin-top:1.25rem">200 Million People.<br /><span>90% Without Access.</span></h2>
+        </div>
+        <div style="padding-top:2.5rem">
+          <p class="opportunity-body">A structural funding gap is leaving Africa's largest underserved market without solutions. Across Africa, 200 million people require at least one assistive product — from wheelchairs and prosthetics to communication devices and learning tools.</p>
+          <p class="opportunity-body">Yet 90% lack access due to availability, affordability, and suitability. The market isn't competitive — it barely exists.</p>
+        </div>
+      </div>
+
+      <div class="big-stats reveal reveal-delay-1">
+        <div class="big-stat-card">
+          <div class="big-stat-num">200M</div>
+          <div class="big-stat-label">Africans need at least one assistive product</div>
+        </div>
+        <div class="big-stat-card">
+          <div class="big-stat-num">90%</div>
+          <div class="big-stat-label">Lack access due to availability &amp; price</div>
+        </div>
+        <div class="big-stat-card">
+          <div class="big-stat-num">98%</div>
+          <div class="big-stat-label">Of AT entrepreneurs cite funding as primary barrier</div>
+        </div>
+      </div>
+
+      <div class="missing-middle reveal reveal-delay-2">
+        <div>
+          <div class="section-label" style="color:rgba(255,255,255,0.6)">The Missing Middle</div>
+          <h3 class="missing-middle-title" style="margin-top:1rem">Too commercial for grants.<br /><em>Too early for venture capital.</em></h3>
+        </div>
+        <div>
+          <p class="missing-middle-body">Without catalytic capital, innovations stall before reaching the people who need them most. No dedicated early-stage investment vehicle currently exists for AT ventures in Africa — the Momentous Fund fills that gap.</p>
+          <div class="roi-badges">
+            <div class="roi-badge">
+              <div class="roi-badge-num">$10T</div>
+              <div class="roi-badge-label">Economic &amp; social benefit<br />over 55 years globally</div>
+            </div>
+            <div class="roi-badge">
+              <div class="roi-badge-num">9:1</div>
+              <div class="roi-badge-label">Return on AT<br />investment</div>
+            </div>
+            <div class="roi-badge">
+              <div class="roi-badge-num">$100K</div>
+              <div class="roi-badge-label">Lifetime income<br />per child with AT</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHO WE ARE -->
+  <section id="who">
+    <div class="who-inner">
+      <div class="section-label reveal">Who We Are</div>
+      <div class="who-grid">
+        <div>
+          <h2 class="who-title reveal" style="margin-top:1.25rem">Africa's AT<br /><span>Ecosystem</span><br />Builder</h2>
+        </div>
+        <div>
+          <div class="who-body reveal">
+            <p>AT4D (Assistive Technologies for Disability Trust) is a spin-out of the Innovate Now Accelerator, delivered by the Global Disability Innovation Hub through the UK government-funded AT2030 programme. We have built the continent's largest network of AT startups and the infrastructure needed to support them.</p>
+            <p>Disability-led from the top — our leadership, advisory board, and investment committee include people with lived experience of disability, ensuring every decision is grounded in the realities of the communities we serve.</p>
+          </div>
+          <div class="who-metrics reveal reveal-delay-1">
+            <div class="who-metric">
+              <div class="who-metric-num">100+</div>
+              <div class="who-metric-label">Entrepreneurs Supported</div>
+            </div>
+            <div class="who-metric">
+              <div class="who-metric-num">45</div>
+              <div class="who-metric-label">Startups Accelerated</div>
+            </div>
+            <div class="who-metric">
+              <div class="who-metric-num">11</div>
+              <div class="who-metric-label">African Countries</div>
+            </div>
+            <div class="who-metric">
+              <div class="who-metric-num">40K+</div>
+              <div class="who-metric-label">Direct Users</div>
+            </div>
+            <div class="who-metric">
+              <div class="who-metric-num">370+</div>
+              <div class="who-metric-label">Jobs Created</div>
+            </div>
+            <div class="who-metric">
+              <div class="who-metric-num">35%</div>
+              <div class="who-metric-label">Graduates with Commercial Products</div>
+            </div>
+          </div>
+          <div class="quote-block reveal reveal-delay-2">
+            <div class="quote-text">"We are building more than a fund. We are building the foundation for an Africa-led AT investment ecosystem."</div>
+            <div class="quote-author">— Bernard Chiira, CEO &amp; Founder, AT4D</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- THE FUND -->
+  <section id="fund">
+    <div class="fund-bg"></div>
+    <div class="fund-inner">
+      <div class="fund-header reveal">
+        <div class="section-label" style="justify-content:center; color:rgba(242,101,34,0.8)">The Momentous Fund</div>
+        <h2 class="fund-title">Africa's First <em>Disability-Led</em><br />AT Investment Vehicle</h2>
+        <p class="fund-subtitle">Catalytic, patient capital designed by people who understand disability tech markets</p>
+      </div>
+
+      <div class="fund-stages reveal reveal-delay-1">
+        <div class="fund-stage">
+          <div class="fund-stage-tag">Pilot · Now</div>
+          <div class="fund-stage-amount">$650K</div>
+          <div class="fund-stage-details">
+            <div class="fund-detail">3–5 startups</div>
+            <div class="fund-detail">$80K–$100K per venture</div>
+            <div class="fund-detail">Alternative financing mechanisms</div>
+            <div class="fund-detail">AT4D alumni</div>
+          </div>
+        </div>
+        <div class="fund-stage">
+          <div class="fund-stage-tag">Fund I · 2028</div>
+          <div class="fund-stage-amount">$10M</div>
+          <div class="fund-stage-details">
+            <div class="fund-detail">25–40 startups</div>
+            <div class="fund-detail">$100K–$250K per venture</div>
+            <div class="fund-detail">Pre-seed and seed stage</div>
+            <div class="fund-detail">Open to qualified investors</div>
+          </div>
+        </div>
+        <div class="fund-stage">
+          <div class="fund-stage-tag">10-Year Vision</div>
+          <div class="fund-stage-amount">$100M</div>
+          <div class="fund-stage-details">
+            <div class="fund-detail">Pan-African AT vehicle</div>
+            <div class="fund-detail">Full ecosystem scale</div>
+            <div class="fund-detail">Crowd-in institutional capital</div>
+            <div class="fund-detail">Established asset class</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="reveal reveal-delay-2">
+        <div class="focus-header">Investment Focus Areas</div>
+        <div class="focus-grid">
+          <div class="focus-card">
+            <div class="focus-icon">♿</div>
+            <div>
+              <div class="focus-card-title">Mobility Innovation</div>
+              <div class="focus-card-body">Wheelchairs, prosthetics, and movement-enabling technologies designed for African contexts</div>
+            </div>
+          </div>
+          <div class="focus-card">
+            <div class="focus-icon">💬</div>
+            <div>
+              <div class="focus-card-title">Communication Technologies</div>
+              <div class="focus-card-body">AAC devices, speech synthesis, and language access tools bridging communication barriers</div>
+            </div>
+          </div>
+          <div class="focus-card">
+            <div class="focus-icon">📚</div>
+            <div>
+              <div class="focus-card-title">Inclusive Education Tools</div>
+              <div class="focus-card-body">Accessible learning platforms and adaptive educational technology for diverse learners</div>
+            </div>
+          </div>
+          <div class="focus-card">
+            <div class="focus-icon">🏡</div>
+            <div>
+              <div class="focus-card-title">Independent Living Solutions</div>
+              <div class="focus-card-body">Smart home, daily living aids, and personal care technologies enabling autonomy</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- APPROACH -->
+  <section id="approach">
+    <div class="approach-inner">
+      <div class="approach-header reveal">
+        <div>
+          <div class="section-label">Our Approach</div>
+          <h2 class="approach-title" style="margin-top:1.25rem">Ecosystem,<br />Not Just a <span>Portfolio</span></h2>
+        </div>
+        <p class="approach-desc" style="padding-top:1rem">Moving beyond writing cheques and into building the conditions for AT ventures to succeed. Our model blends structured investment with hands-on venture building, evidence generation, and market creation.</p>
+      </div>
+
+      <div class="pillars reveal reveal-delay-1">
+        <div class="pillar">
+          <div class="pillar-num">01</div>
+          <div class="pillar-title">Structured Investment</div>
+          <div class="pillar-body">Flexible instruments — SAFE notes, convertible notes, direct equity, revenue-based financing — matched to venture stage and needs.</div>
+        </div>
+        <div class="pillar">
+          <div class="pillar-num">02</div>
+          <div class="pillar-title">Venture Building</div>
+          <div class="pillar-body">Tailored technical assistance, product validation, governance strengthening, and go-to-market support.</div>
+        </div>
+        <div class="pillar">
+          <div class="pillar-num">03</div>
+          <div class="pillar-title">Evidence Generation</div>
+          <div class="pillar-body">Impact measurement, user research, and the Momentous Playbook — establishing the investment case for African AT.</div>
+        </div>
+        <div class="pillar">
+          <div class="pillar-num">04</div>
+          <div class="pillar-title">Market Building</div>
+          <div class="pillar-body">Research, knowledge dissemination, and thought leadership to expand the investable AT ecosystem.</div>
+        </div>
+        <div class="pillar">
+          <div class="pillar-num">05</div>
+          <div class="pillar-title">Strategic Partnerships</div>
+          <div class="pillar-body">Distribution partnerships, co-investment opportunities, and ecosystem access for portfolio companies.</div>
+        </div>
+        <div class="pillar">
+          <div class="pillar-num">06</div>
+          <div class="pillar-title">Governance Support</div>
+          <div class="pillar-body">Board development, financial management, compliance frameworks, and operational best practices.</div>
+        </div>
+      </div>
+
+      <div class="thesis reveal reveal-delay-2">
+        <div class="thesis-pillar">
+          <div class="thesis-pillar-title">Validate</div>
+          <div class="thesis-pillar-body">Prove the commercial case for African AT through structured investment, real portfolio data, and the Momentous Playbook — replacing anecdote with evidence.</div>
+        </div>
+        <div class="thesis-pillar">
+          <div class="thesis-pillar-title">De-risk</div>
+          <div class="thesis-pillar-body">Reduce perceived investment risk through governance support, transparent reporting, and hands-on venture building — making AT ventures legible to institutional investors.</div>
+        </div>
+        <div class="thesis-pillar">
+          <div class="thesis-pillar-title">Crowd In Capital</div>
+          <div class="thesis-pillar-body">Use early results to attract larger pools of impact and commercial capital to African AT — moving from pioneering fund to market catalyst.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EVIDENCE & VISION -->
+  <section id="evidence">
+    <div class="evidence-inner">
+      <div class="reveal">
+        <div class="section-label">Evidence &amp; Vision</div>
+        <h2 class="evidence-title">The Commercial + <span>Impact</span> Case</h2>
+      </div>
+
+      <div class="evidence-cards reveal reveal-delay-1">
+        <div class="evidence-card">
+          <div class="evidence-card-title">Underserved Market</div>
+          <div class="evidence-card-body">200M potential end users with near-zero existing supply. This is a market creation opportunity — not a marginal improvement on a competitive space.</div>
+        </div>
+        <div class="evidence-card">
+          <div class="evidence-card-title">SDG &amp; ESG Aligned</div>
+          <div class="evidence-card-body">Strongly aligned with global SDGs, ESG mandates, and disability inclusion commitments — speaking directly to institutional investor priorities.</div>
+        </div>
+        <div class="evidence-card">
+          <div class="evidence-card-title">Evidence-Based</div>
+          <div class="evidence-card-body">The Momentous Playbook establishes structured proof of concept and validated methodology — turning pilot data into investment-grade evidence.</div>
+        </div>
+      </div>
+
+      <div class="reveal reveal-delay-2">
+        <div class="partners-label">Strategic Partners</div>
+        <div class="partner-cards">
+          <div class="partner-card">
+            <div class="partner-name">Judith Neilson Foundation</div>
+            <div class="partner-body">Catalytic capital partner for the pilot. Sydney-based foundation supporting long-term, locally grounded solutions through trusted partnerships. MoU signed at the Remarkable Summit in Sydney.</div>
+          </div>
+          <div class="partner-card">
+            <div class="partner-name">Global Disability Innovation Hub</div>
+            <div class="partner-body">AT4D is a spin-out of the Innovate Now Accelerator delivered through GDI Hub's AT2030 programme — bringing institutional credibility and a tested methodology for building AT ventures.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section id="cta">
+    <div class="cta-bg"></div>
+    <div class="cta-inner">
+      <div class="section-label reveal" style="justify-content:center; color:rgba(242,101,34,0.7)">Next Steps</div>
+      <h2 class="cta-title reveal reveal-delay-1">Let's Build<br /><em>This Together</em></h2>
+      <p class="cta-body reveal reveal-delay-2">The funding gap in African assistive technology is not a feature — it's a failure. We're inviting partners who share our conviction that disability innovation is investable, scalable, and essential.</p>
+      <div class="cta-actions reveal reveal-delay-3">
+        <a href="mailto:communications@at4d.org" class="btn-primary">
+          Get In Touch
+          <svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M2 6.5h9M7.5 2.5l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+        <a href="https://www.at4d.org" class="btn-ghost" target="_blank" rel="noopener">Visit at4d.org</a>
+      </div>
+      <div class="contact-row reveal">
+        <div class="contact-item">
+          <div class="contact-label">Email</div>
+          <a href="mailto:communications@at4d.org" class="contact-value">communications@at4d.org</a>
+        </div>
+        <div class="contact-item">
+          <div class="contact-label">Phone</div>
+          <a href="tel:+254720387252" class="contact-value">+254 720 387 252</a>
+        </div>
+        <div class="contact-item">
+          <div class="contact-label">Web</div>
+          <a href="https://www.at4d.org" class="contact-value" target="_blank" rel="noopener">www.at4d.org</a>
+        </div>
+        <div class="contact-item">
+          <div class="contact-label">Location</div>
+          <span class="contact-value">Nairobi, Kenya</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-logo">AT4D <span>Momentous Fund</span> — Nairobi, Kenya</div>
+    <div class="footer-copy">Assistive Technologies for Disability Trust © 2026</div>
+  </footer>
+
+  <script>
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) entry.target.classList.add('visible');
+      });
+    }, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
+    reveals.forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>
